@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+:root {
+  --bg-cream: #F5F0EB;
+  --text-primary: #1A1A1A;
+  --text-secondary: #8A8A8A;
+  --green-brand: #2D5A27;
+  --green-accent: #4CAF50;
+  --dark: #1A1A1A;
+  --white: #FFFFFF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-primary);
+  background-color: var(--bg-cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 0.95;
+}
+
+p {
+  color: #555;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--green-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.cta-btn {
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out, background-color 300ms ease-out;
+}
+.cta-btn:hover {
+  transform: scale(1.05);
+}
+.cta-btn:active {
+  transform: scale(0.98) !important;
+}
+
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-left {
+  animation: marquee-left 30s linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right 30s linear infinite;
+}
+
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.cream-section {
+  position: relative;
+  isolation: isolate;
+}
+
+.cream-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%23000000' fill-opacity='0.12'%3E%3Ccircle cx='8' cy='14' r='1'/%3E%3Ccircle cx='32' cy='80' r='1'/%3E%3Ccircle cx='56' cy='22' r='1'/%3E%3Ccircle cx='84' cy='94' r='1'/%3E%3Ccircle cx='102' cy='38' r='1'/%3E%3Ccircle cx='18' cy='106' r='1'/%3E%3Ccircle cx='70' cy='64' r='1'/%3E%3Ccircle cx='108' cy='116' r='1'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+@keyframes marqueeLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes marqueeRight {
+  0% { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation-play-state: paused;
+  }
+}
