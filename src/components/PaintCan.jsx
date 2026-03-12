@@ -23,11 +23,7 @@ const chrome = {
   envMapIntensity: 1.8,
 }
 
-const HERO_LEAN_Z = THREE.MathUtils.degToRad(-15)
-const ABOUT_LEAN_Z = THREE.MathUtils.degToRad(12)
-const CONSTANT_TILT_X = THREE.MathUtils.degToRad(-5)
-
-export default function PaintCan({ scrollProgressRef }) {
+export default function PaintCan() {
   const group = useRef()
   const baseRotation = useRef(THREE.MathUtils.degToRad(60))
 
@@ -47,22 +43,17 @@ export default function PaintCan({ scrollProgressRef }) {
     return new THREE.TubeGeometry(curve, 48, 0.03, 8, false)
   }, [])
 
-  useFrame(({ clock }) => {
+  useFrame(() => {
     if (!group.current) return
-
-    const progress = scrollProgressRef?.current ?? 0
-
     baseRotation.current += 0.005
-    const scrollYOffset = progress * THREE.MathUtils.degToRad(90)
-
-    group.current.rotation.y = baseRotation.current + scrollYOffset
-    group.current.rotation.z = THREE.MathUtils.lerp(HERO_LEAN_Z, ABOUT_LEAN_Z, progress)
-    group.current.rotation.x = CONSTANT_TILT_X
+    group.current.rotation.y = baseRotation.current
   })
 
+  const TILT_X = THREE.MathUtils.degToRad(-8)
+  const TILT_Z = THREE.MathUtils.degToRad(-12)
+
   return (
-    <group ref={group} rotation={[CONSTANT_TILT_X, THREE.MathUtils.degToRad(60), HERO_LEAN_Z]}>
-      {/* Main body */}
+    <group ref={group} rotation={[TILT_X, THREE.MathUtils.degToRad(60), TILT_Z]}>
       <mesh>
         <cylinderGeometry args={[1.2, 1.15, 2.8, 64]} />
         <meshPhysicalMaterial {...bodyMat} />
@@ -75,38 +66,26 @@ export default function PaintCan({ scrollProgressRef }) {
           depthWrite={false}
         />
       </mesh>
-
-      {/* Top lid */}
       <mesh position={[0, 1.425, 0]}>
         <cylinderGeometry args={[1.22, 1.22, 0.05, 64]} />
         <meshPhysicalMaterial {...chrome} />
       </mesh>
-
-      {/* Top rim */}
       <mesh position={[0, 1.4, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[1.22, 0.055, 12, 64]} />
         <meshPhysicalMaterial {...chrome} />
       </mesh>
-
-      {/* Bottom rim */}
       <mesh position={[0, -1.325, 0]}>
         <cylinderGeometry args={[1.18, 1.18, 0.15, 64]} />
         <meshPhysicalMaterial {...chrome} />
       </mesh>
-
-      {/* Bail handle — hangs from outside the rim, rests behind the can */}
       <mesh>
         <primitive object={handleGeo} attach="geometry" />
         <meshPhysicalMaterial {...chrome} />
       </mesh>
-
-      {/* Handle pivot — left */}
       <mesh position={[-1.3, 1.45, 0]} rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.04, 0.04, 0.1, 12]} />
         <meshPhysicalMaterial {...chrome} />
       </mesh>
-
-      {/* Handle pivot — right */}
       <mesh position={[1.3, 1.45, 0]} rotation={[0, 0, Math.PI / 2]}>
         <cylinderGeometry args={[0.04, 0.04, 0.1, 12]} />
         <meshPhysicalMaterial {...chrome} />

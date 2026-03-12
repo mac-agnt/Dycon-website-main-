@@ -1,0 +1,60 @@
+Project Context
+This is a premium single-page website for Dycon (dycon.ie), an Irish building materials company. Built with Vite + React + Tailwind CSS + Three.js (@react-three/fiber, @react-three/drei) + GSAP ScrollTrigger.
+Tech Stack — Do Not Suggest Alternatives
+
+React 18 with functional components and hooks
+Vite for bundling (not Next.js, not CRA)
+Tailwind CSS for styling (not CSS modules, not styled-components)
+Three.js via @react-three/fiber and @react-three/drei for 3D
+GSAP + ScrollTrigger for scroll animations
+Google Fonts: Oswald (headings) + DM Sans (body)
+
+Code Style
+
+Use functional components with hooks
+Use const arrow functions for components
+Prefer named exports
+Use Tailwind utility classes, not custom CSS (except for animations and Three.js)
+Keep components in single files (no separate CSS files)
+Use refs (useRef) for DOM elements that GSAP targets
+Use useEffect with cleanup for all GSAP ScrollTrigger instances
+Always use gsap.context() for React cleanup
+
+Three.js Rules
+
+All 3D geometry must use EXACT numeric values, not vague descriptions
+When creating curved geometry (TubeGeometry), provide literal Vector3 coordinate arrays
+Always include <Environment preset="studio" /> for metallic materials
+Use MeshPhysicalMaterial for realistic surfaces (never MeshBasicMaterial)
+The PaintCan component uses useFrame for continuous animation — never stop it
+Canvas must have gl={{ alpha: true, antialias: true }} for transparent bg
+Never add shadows unless explicitly requested
+
+GSAP ScrollTrigger Rules
+
+Always register: gsap.registerPlugin(ScrollTrigger)
+Always clean up: use gsap.context() in useEffect, return ctx.revert()
+Call ScrollTrigger.refresh() after component mount
+For animations that should STOP at a position: use onEnter/onLeave callbacks with gsap.killTweensOf(), not continuous scrub
+Prefer toggleActions over scrub for discrete state changes (show/hide)
+Never create overlapping ScrollTriggers on the same element
+
+Critical Behavioral Rules
+
+Do NOT use browser tools, screenshot tools, or wait commands after changes
+Do NOT modify files not mentioned in the prompt
+Do NOT add console.log statements unless debugging is requested
+Do NOT refactor or rename existing working code unless asked
+Do NOT change the colour palette, fonts, or layout unless specifically requested
+When fixing a bug, explain what was wrong in a code comment
+One task per prompt. Do not scope-creep.
+
+Colour Palette (CSS variables in :root)
+
+--bg-cream: #F5F0EB
+--text-primary: #1A1A1A
+--text-secondary: #8A8A8A
+--green-brand: #2D5A27
+--green-accent: #4CAF50
+--dark: #1A1A1A
+--white: #FFFFFF

@@ -22,28 +22,30 @@ html {
 
 body {
   font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
   color: var(--text-primary);
   background-color: var(--bg-cream);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.005em;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'DM Sans', sans-serif;
   font-weight: 700;
-  text-transform: uppercase;
-  line-height: 0.95;
+  line-height: 1.2;
 }
 
 p {
-  color: #555;
+  color: #5C5C5C;
+  line-height: 1.7;
 }
 
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--green-accent);
-  outline-offset: 3px;
-  border-radius: 4px;
+  outline-offset: 4px;
+  border-radius: 6px;
 }
 
 .cta-btn {

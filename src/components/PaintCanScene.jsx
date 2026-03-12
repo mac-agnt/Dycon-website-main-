@@ -1,9 +1,9 @@
 import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Environment } from '@react-three/drei'
+import { Environment } from '@react-three/drei'
 import PaintCan from './PaintCan'
 
-export default function PaintCanScene({ scrollProgressRef }) {
+export default function PaintCanScene() {
   return (
     <Canvas
       camera={{ position: [0, 0.5, 6], fov: 38 }}
@@ -16,11 +16,9 @@ export default function PaintCanScene({ scrollProgressRef }) {
       <directionalLight position={[-4, 3, -3]} intensity={0.25} />
 
       <Suspense fallback={null}>
-        <PaintCan scrollProgressRef={scrollProgressRef} />
+        <PaintCan />
         <Environment preset="studio" />
       </Suspense>
-
-      <OrbitControls enableZoom={false} enablePan={false} />
     </Canvas>
   )
 }
